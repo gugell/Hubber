@@ -1,8 +1,10 @@
 //
 //	Parent.swift
+//  Hubber
 //
-//	Create by Leo on 15/2/2017
-//	Copyright © 2017. All rights reserved.
+//  Created by Ilia Gutu on 1/18/18.
+//  Copyright © 2018 Stamax. All rights reserved.
+//
 
 import Foundation
 import ObjectMapper

@@ -35,7 +35,9 @@ class TrendingViewController: UIViewController,UITableViewDelegate,IndicatorInfo
         
         dataSource.configureCell = { dataSource, tableView, indexPath, repository in
             //   let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "reuseIdentifier")
-            let cell = RepoCell(frame: CGRect(origin: CGPoint.init(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.width, height: 100)))
+            let cell = tableView.dequeueReusableCell(withIdentifier: "repoCell") as! RepoCell
+                
+                //RepoCell(frame: CGRect(origin: CGPoint.init(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.width, height: 100)))
             
             cell.configure(title: repository.fullName ,
                            description: repository.descriptionField,
@@ -101,7 +103,7 @@ class TrendingViewController: UIViewController,UITableViewDelegate,IndicatorInfo
         self.view = self.tableView
         
         self.tableView.tableFooterView = UIView()
-        
+        self.tableView.register(RepoCell.self, forCellReuseIdentifier: "repoCell")
         self.refreshControl = UIRefreshControl()
         if let refreshControl = self.refreshControl {
             self.view.addSubview(refreshControl)

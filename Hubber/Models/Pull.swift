@@ -1,9 +1,10 @@
 //
 //	Pull.swift
+//  Hubber
 //
-//	Create by Leo on 15/2/2017
-//	Copyright © 2017. All rights reserved.
-//	Model file generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
+//  Created by Ilia Gutu on 1/18/18.
+//  Copyright © 2018 Stamax. All rights reserved.
+//
 
 import Foundation
 import ObjectMapper

@@ -13,13 +13,13 @@ import ObjectMapper
 public struct User : Mappable{
     
     var avatarUrl : String?
-    var bio : AnyObject?
-    var blog : AnyObject?
+    var bio : String?
+    var blog : String?
     var collaborators : Int?
-    var company : AnyObject?
+    var company : String?
     var createdAt : String?
     var diskUsage : Int?
-    var email : AnyObject?
+    var email : String?
     var eventsUrl : String?
     var followers : Int?
     var followersUrl : String?

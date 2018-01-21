@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import SnapKit
 
 class AvatarTableViewCell: UITableViewCell {
     
@@ -15,12 +16,18 @@ class AvatarTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        contentImageView = UIImageView()
         contentImageView.layer.masksToBounds = true
         contentImageView.layer.cornerRadius = 50
         contentImageView.sd_setShowActivityIndicatorView(true)
         contentImageView.sd_setIndicatorStyle(.gray)
         self.addSubview(contentImageView)
+        self.contentImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentImageView.snp.makeConstraints { make in
+            make.top.equalTo(self).offset(10)
+            make.height.width.equalTo(100)
+            make.centerY.centerX.equalTo(self)
+        }
         
     }
     
@@ -31,10 +38,7 @@ class AvatarTableViewCell: UITableViewCell {
     var contentImageUrl: String? {
         didSet{
             guard let urlString = self.contentImageUrl, let url = URL(string: urlString) else { return }
-            contentImageView.sd_setImage(with: url) { [weak self] (_, _, _, _) in
-                guard let center = self?.center else { return }
-                self?.contentImageView.center = center
-            }
+            contentImageView.sd_setImage(with: url)
         }
     }
     

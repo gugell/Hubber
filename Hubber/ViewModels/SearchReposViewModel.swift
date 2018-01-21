@@ -89,7 +89,7 @@ public class SearchReposViewModel: SearchReposViewModelType, SearchReposViewMode
                 return self.pageIndex == 1 ? response : elements + response
             }
             .sample(response)
-            .bindTo(elements)
+            .bind(to:elements)
             .addDisposableTo(disposeBag)
 
         self.selectedViewModel = self.repository.asDriver().filterNil().flatMapLatest{ repo -> Driver<RepoViewModel> in

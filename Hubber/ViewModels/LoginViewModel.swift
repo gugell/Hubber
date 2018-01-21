@@ -30,7 +30,6 @@ public protocol LoginViewModelOutputs {
     var enableLogin: Driver<Bool>{ get }
     var signedIn: Driver<Bool> { get }
     var isLoading: Driver<Bool> { get }
-    
 }
 
 public protocol LoginViewModelType {    

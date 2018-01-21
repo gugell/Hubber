@@ -103,7 +103,6 @@ class LoginViewController: UIViewController,UITableViewDelegate {
             }).addDisposableTo(disposeBag)
         
         self.viewModel.isLoading
-            //.drive()
             .drive(isLoading(for: self.view))
             .addDisposableTo(disposeBag)
     }
@@ -119,6 +118,7 @@ class LoginViewController: UIViewController,UITableViewDelegate {
         self.tableView.rx.setDelegate(self).addDisposableTo(disposeBag)
         self.tableView.isScrollEnabled = false
         self.tableView.allowsSelection = false
+        self.tableView.separatorStyle = .none
         self.view = self.tableView
         
     }

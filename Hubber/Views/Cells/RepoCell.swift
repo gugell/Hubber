@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class RepoCell: UITableViewCell {
     
@@ -15,15 +16,24 @@ class RepoCell: UITableViewCell {
      var languageLabel: UILabel!
      var starsLabel: UILabel!
     
-    func configure(title: String, description: String, language: String, stars: String) {
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupViewConfiguration()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupViewConfiguration(){
         
         titleLabel = UILabel()
         titleLabel.font = UIFont.systemFont(ofSize: 20)
         titleLabel.textColor = UIColor.purple
-        titleLabel.text = title
         titleLabel.sizeToFit()
         self.addSubview(titleLabel)
-       
+        
         descriptionLabel = UILabel()
         descriptionLabel.text = description
         descriptionLabel.textColor = UIColor.darkGray
@@ -32,25 +42,23 @@ class RepoCell: UITableViewCell {
         descriptionLabel.adjustsFontSizeToFitWidth = true
         descriptionLabel.sizeToFit()
         self.addSubview(descriptionLabel)
-
+        
         languageLabel = UILabel()
-        languageLabel.text = language
         languageLabel.textColor = UIColor.darkGray
-
+        
         languageLabel.sizeToFit()
         self.addSubview(languageLabel)
-
+        
         starsLabel = UILabel()
-        starsLabel.text = stars
         starsLabel.textColor = UIColor.darkGray
         starsLabel.sizeToFit()
         self.addSubview(starsLabel)
-    
+        
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         languageLabel.translatesAutoresizingMaskIntoConstraints = false
         starsLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        
         
         
         var allConstraints = [NSLayoutConstraint]()
@@ -58,15 +66,15 @@ class RepoCell: UITableViewCell {
                                           "descriptionLabel": descriptionLabel,
                                           "languageLabel": languageLabel,
                                           "starsLabel": starsLabel]
-
+        
         let titleLabelConstraints = NSLayoutConstraint.constraints(
             withVisualFormat: "H:|-[titleLabel]-|",
             options: [],
             metrics: nil,
             views: views)
         
-         allConstraints += titleLabelConstraints
-
+        allConstraints += titleLabelConstraints
+        
         let descriptionLabelConstraints = NSLayoutConstraint.constraints(
             withVisualFormat: "H:|-[descriptionLabel]-|",
             options: [],
@@ -74,7 +82,7 @@ class RepoCell: UITableViewCell {
             views: views)
         
         allConstraints += descriptionLabelConstraints
-
+        
         let starsAndlanguageLabelConstraints = NSLayoutConstraint.constraints(
             withVisualFormat: "H:|-[languageLabel]-[starsLabel]-|",
             options: [],
@@ -82,7 +90,7 @@ class RepoCell: UITableViewCell {
             views: views)
         
         allConstraints += starsAndlanguageLabelConstraints
-
+        
         
         let verticalConstraints = NSLayoutConstraint.constraints(
             withVisualFormat: "V:|-[titleLabel]-[descriptionLabel]-[languageLabel]-|",
@@ -91,7 +99,7 @@ class RepoCell: UITableViewCell {
             views: views)
         
         allConstraints += verticalConstraints
-
+        
         let starsLabelverticalConstraints = NSLayoutConstraint.constraints(
             withVisualFormat: "V:|-[titleLabel]-[descriptionLabel]-[starsLabel]-|",
             options: [],
@@ -99,9 +107,16 @@ class RepoCell: UITableViewCell {
             views: views)
         
         allConstraints += starsLabelverticalConstraints
-
+        
         NSLayoutConstraint.activate(allConstraints)
+        
+    }
     
-
+    func configure(title: String, description: String, language: String, stars: String) {
+   
+        titleLabel.text = title
+        descriptionLabel.text = description
+        languageLabel.text = language
+        starsLabel.text = stars
     }
 }

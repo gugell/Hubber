@@ -43,9 +43,9 @@ class SegmentedViewController: ButtonBarPagerTabStripViewController {
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         return [
-            TrendingViewController(itemInfo: "swift"),
-            TrendingViewController(itemInfo: "objective-c"),
-            TrendingViewController(itemInfo: "java")
+            TrendingViewController(itemInfo: "Swift"),
+            TrendingViewController(itemInfo: "Objective-c"),
+            TrendingViewController(itemInfo: "Java")
         ]
     }
 

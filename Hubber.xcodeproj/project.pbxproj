@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5C78994300888416B32396AB /* Pods_HubberTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C9EE47036113FE8DA2E7D17 /* Pods_HubberTests.framework */; };
+		6205C11C20136403004BA1B9 /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6205C11B20136403004BA1B9 /* SearchUsersViewController.swift */; };
+		6205C11E20136443004BA1B9 /* SearchUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6205C11D20136443004BA1B9 /* SearchUsersViewModel.swift */; };
 		622E0D122010DD8300344947 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622E0D112010DD8300344947 /* AppDelegate.swift */; };
 		622E0D142010DD8300344947 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622E0D132010DD8300344947 /* ViewController.swift */; };
 		622E0D172010DD8300344947 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 622E0D152010DD8300344947 /* Main.storyboard */; };
@@ -61,6 +63,10 @@
 		622E0D9D2010F3B700344947 /* SearchReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622E0D972010F3B700344947 /* SearchReposViewController.swift */; };
 		622E0D9E2010F3B700344947 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622E0D982010F3B700344947 /* LoginViewController.swift */; };
 		622E0D9F2010F3B700344947 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622E0D992010F3B700344947 /* ProfileViewController.swift */; };
+		624C18EB2013B420000389DC /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C18EA2013B420000389DC /* UserCell.swift */; };
+		624C18ED2013C00D000389DC /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C18EC2013C00D000389DC /* Users.swift */; };
+		624C18EF2013C125000389DC /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C18EE2013C125000389DC /* ProfileCell.swift */; };
+		624C18F12013D17A000389DC /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C18F02013D17A000389DC /* ProfileHeaderView.swift */; };
 		62F7C6A32010FA5E004A368A /* RepoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7C6A02010FA5E004A368A /* RepoHeaderView.swift */; };
 		62F7C6A42010FA5E004A368A /* RepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7C6A22010FA5E004A368A /* RepoCell.swift */; };
 		62F7C6AA2010FA97004A368A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F7C6A52010FA96004A368A /* LoginViewModel.swift */; };
@@ -101,6 +107,8 @@
 /* Begin PBXFileReference section */
 		0C9EE47036113FE8DA2E7D17 /* Pods_HubberTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HubberTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		16CB1E37DF5980BDC20085ED /* Pods-Hubber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hubber.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hubber/Pods-Hubber.release.xcconfig"; sourceTree = "<group>"; };
+		6205C11B20136403004BA1B9 /* SearchUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersViewController.swift; sourceTree = "<group>"; };
+		6205C11D20136443004BA1B9 /* SearchUsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersViewModel.swift; sourceTree = "<group>"; };
 		622E0D0E2010DD8300344947 /* Hubber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hubber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		622E0D112010DD8300344947 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		622E0D132010DD8300344947 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +166,10 @@
 		622E0D972010F3B700344947 /* SearchReposViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchReposViewController.swift; sourceTree = "<group>"; };
 		622E0D982010F3B700344947 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		622E0D992010F3B700344947 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		624C18EA2013B420000389DC /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		624C18EC2013C00D000389DC /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		624C18EE2013C125000389DC /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		624C18F02013D17A000389DC /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		62F7C6A02010FA5E004A368A /* RepoHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoHeaderView.swift; sourceTree = "<group>"; };
 		62F7C6A22010FA5E004A368A /* RepoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoCell.swift; sourceTree = "<group>"; };
 		62F7C6A52010FA96004A368A /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -351,6 +363,7 @@
 				622E0D702010E8DE00344947 /* User.swift */,
 				622E0D6D2010E85800344947 /* Repository.swift */,
 				622E0D7E2010EC0D00344947 /* Repositories.swift */,
+				624C18EC2013C00D000389DC /* Users.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -456,6 +469,7 @@
 				622E0D972010F3B700344947 /* SearchReposViewController.swift */,
 				622E0D982010F3B700344947 /* LoginViewController.swift */,
 				622E0D992010F3B700344947 /* ProfileViewController.swift */,
+				6205C11B20136403004BA1B9 /* SearchUsersViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -468,6 +482,7 @@
 				62F7C6A82010FA96004A368A /* RepoViewModel.swift */,
 				62F7C6A92010FA96004A368A /* SearchReposViewModel.swift */,
 				62F7C6A72010FA96004A368A /* TrendingViewModel.swift */,
+				6205C11D20136443004BA1B9 /* SearchUsersViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -477,6 +492,7 @@
 			children = (
 				62F7C6A12010FA5E004A368A /* Cells */,
 				62F7C6A02010FA5E004A368A /* RepoHeaderView.swift */,
+				624C18F02013D17A000389DC /* ProfileHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -486,6 +502,8 @@
 			children = (
 				62F7C6A22010FA5E004A368A /* RepoCell.swift */,
 				62F7C6CF2011093D004A368A /* AvatarTableViewCell.swift */,
+				624C18EA2013B420000389DC /* UserCell.swift */,
+				624C18EE2013C125000389DC /* ProfileCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -648,6 +666,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -663,6 +682,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -755,6 +775,7 @@
 				622E0D882010EF0100344947 /* Observable+ObjectMapper.swift in Sources */,
 				622E0D142010DD8300344947 /* ViewController.swift in Sources */,
 				622E0D7B2010EB5500344947 /* RxMoyaProvider.swift in Sources */,
+				624C18EF2013C125000389DC /* ProfileCell.swift in Sources */,
 				62F7C6C02010FC64004A368A /* Comment.swift in Sources */,
 				622E0D9B2010F3B700344947 /* SegmentedViewController.swift in Sources */,
 				62F7C6C52010FCBD004A368A /* Tree.swift in Sources */,
@@ -765,9 +786,11 @@
 				622E0D4F2010E3CB00344947 /* FontLoader.swift in Sources */,
 				622E0D9A2010F3B700344947 /* TrendingViewController.swift in Sources */,
 				622E0D572010E3CB00344947 /* ThemifyIcon.swift in Sources */,
+				6205C11C20136403004BA1B9 /* SearchUsersViewController.swift in Sources */,
 				62F7C6C62010FCBD004A368A /* Author.swift in Sources */,
 				622E0D7D2010EBFB00344947 /* Authorizations.swift in Sources */,
 				622E0D9C2010F3B700344947 /* RepoViewController.swift in Sources */,
+				6205C11E20136443004BA1B9 /* SearchUsersViewModel.swift in Sources */,
 				62F7C6B02010FAEA004A368A /* Reactive.swift in Sources */,
 				622E0D902010F26400344947 /* GlobalRouter.swift in Sources */,
 				62F7C6C82010FCD2004A368A /* PullRequest.swift in Sources */,
@@ -807,13 +830,16 @@
 				622E0D6C2010E82A00344947 /* Generics.swift in Sources */,
 				622E0D8D2010F02600344947 /* AuthManager.swift in Sources */,
 				622E0D7A2010EB5500344947 /* Observable+Response.swift in Sources */,
+				624C18EB2013B420000389DC /* UserCell.swift in Sources */,
 				62F7C6CE20110286004A368A /* AppearanceProxyHelper.swift in Sources */,
 				622E0D712010E8DE00344947 /* Owner.swift in Sources */,
+				624C18ED2013C00D000389DC /* Users.swift in Sources */,
 				622E0D9D2010F3B700344947 /* SearchReposViewController.swift in Sources */,
 				62F7C6BA2010FC3C004A368A /* Commits.swift in Sources */,
 				622E0D922010F2B900344947 /* ViewsCoordinator.swift in Sources */,
 				622E0D7F2010EC0D00344947 /* Repositories.swift in Sources */,
 				622E0D4E2010E3CB00344947 /* Iconic.swift in Sources */,
+				624C18F12013D17A000389DC /* ProfileHeaderView.swift in Sources */,
 				622E0D512010E3CB00344947 /* MapIcon.swift in Sources */,
 				622E0D722010E8DE00344947 /* User.swift in Sources */,
 			);
@@ -972,6 +998,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B52WSHAMYZ;
 				INFOPLIST_FILE = Hubber/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stamax.Hubber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -988,6 +1015,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B52WSHAMYZ;
 				INFOPLIST_FILE = Hubber/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stamax.Hubber;
 				PRODUCT_NAME = "$(TARGET_NAME)";

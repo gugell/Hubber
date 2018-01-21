@@ -15,7 +15,7 @@ target 'Hubber' do
     #  pod 'Traits', '~> 0.1'
     pod 'RxDataSources', '~> 1.0'
     pod 'ObjectMapper'
-    
+    pod 'SnapKit','<4'
     pod 'XLPagerTabStrip', '~> 7.0'
     pod 'SVProgressHUD'
     pod 'SDWebImage'

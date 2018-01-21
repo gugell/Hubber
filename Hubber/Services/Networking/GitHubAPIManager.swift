@@ -51,7 +51,7 @@ public func JSONResponseDataFormatter(_ data: Data) -> Data {
 }
 
 public class GitHubAPIManager:GitHubAPI {
-    
+   
     static let sharedAPI = GitHubAPIManager()
     
     public func signin(_ username: String, password: String) -> Observable<Bool>{
@@ -82,6 +82,38 @@ public class GitHubAPIManager:GitHubAPI {
         
     }
     
+    public func users(_ keyword: String) -> Observable<[User]> {
+        
+        return GithubProvider.request(GitHub.usersSearch(query: keyword))
+            .mapObject(Users.self)
+            .observeOn(MainScheduler.instance)
+            .flatMapLatest{ users -> Observable<[User]> in
+                guard let items = users.items else {
+                    return Observable.empty()
+                }
+                return Observable.just(items)
+        }
+    }
+    
+    public func repositories(_ username: String) -> Observable<[Repository]> {
+        return GithubProvider.request(GitHub.Repos(fullname: username))
+            .mapArray(Repository.self)
+            .observeOn(MainScheduler.instance)
+            .flatMapLatest{ repositories -> Observable<[Repository]> in
+                return Observable.just(repositories)
+        }
+    }
+    
+    public func usersList(since: Int?) -> Observable<[User]> {
+        return GithubProvider.request(GitHub.Users(since:since))
+            .mapArray(User.self)
+            .observeOn(MainScheduler.instance)
+            .flatMapLatest{ users -> Observable<[User]> in
+                return Observable.just(users)
+        }
+    }
+    
+    
     public func recentRepositories(_ language:String, page:Int) -> Observable<[Repository]> {
         return GithubProvider.request(GitHub.TrendingReposSinceLastWeek(language: language, page: page))
             .mapObject(Repositories.self)
@@ -97,6 +129,15 @@ public class GitHubAPIManager:GitHubAPI {
     
     public func profile() -> Observable<User> {
         return GithubProvider.request(GitHub.User)
+            .mapObject(User.self)
+            .observeOn(MainScheduler.instance)
+            .flatMapLatest{ user -> Observable<User> in
+                return Observable.just(user)
+        }
+    }
+    
+    public func profile(by userId:String) -> Observable<User> {
+        return GithubProvider.request(GitHub.Profile(userId))
             .mapObject(User.self)
             .observeOn(MainScheduler.instance)
             .flatMapLatest{ user -> Observable<User> in

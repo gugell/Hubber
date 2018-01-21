@@ -40,6 +40,7 @@ class ViewsCoordinator: NSObject {
         case .main:
             let tabBarController = UITabBarController()
             let searchReposViewController = SearchReposViewController()
+            let searchUsersViewController = SearchUsersViewController()
             let segmentedViewController = SegmentedViewController()
             let profileViewController = ProfileViewController()
             
@@ -49,17 +50,26 @@ class ViewsCoordinator: NSObject {
             
             let searchTabbaritem = UITabBarItem()
             searchTabbaritem.icon(from: .Ionicon, code: "ios-search-strong", imageSize: CGSize.init(width: 25, height: 25), ofSize: 25)
-            searchTabbaritem.title = NSLocalizedString("Search", comment: "")
+            searchTabbaritem.title = NSLocalizedString("Repositories", comment: "")
+            
+            
+            let searchUsersTabbaritem = UITabBarItem()
+            searchUsersTabbaritem.icon(from: .Ionicon, code: "ios-search-strong", imageSize: CGSize.init(width: 25, height: 25), ofSize: 25)
+            searchUsersTabbaritem.title = NSLocalizedString("Users", comment: "")
+            
             let profileTabbaritem = UITabBarItem()
             profileTabbaritem.icon(from: .Ionicon, code: "person", imageSize: CGSize.init(width: 25, height: 25), ofSize: 25)
             profileTabbaritem.title = NSLocalizedString("Profile", comment: "")
             
             segmentedViewController.tabBarItem = trendingTabbaritem
             searchReposViewController.tabBarItem = searchTabbaritem
+            searchUsersViewController.tabBarItem = searchUsersTabbaritem
             profileViewController.tabBarItem = profileTabbaritem
-            //    UINavigationController(rootViewController: searchReposViewController),
+            //
             tabBarController.viewControllers = [
                 UINavigationController(rootViewController: segmentedViewController),
+                UINavigationController(rootViewController: searchReposViewController),
+                UINavigationController(rootViewController: searchUsersViewController),
                 UINavigationController(rootViewController: profileViewController)
             ]
             return tabBarController

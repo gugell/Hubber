@@ -13,12 +13,15 @@ public enum GitHub {
     case Token(username: String, password: String)
     case RepoSearch(query: String, page:Int)
     case TrendingReposSinceLastWeek(language: String, page:Int)
-    case Repo(fullname: String)
+    case Repos(fullname: String)
     case RepoReadMe(fullname: String)
     case Pulls(fullname: String)
     case Issues(fullname: String)
     case Commits(fullname: String)
     case User
+    case Profile(String)
+    case Users(since:Int?)
+    case usersSearch(query:String)
 }
 
 
@@ -37,8 +40,8 @@ extension GitHub: TargetType {
         case .RepoSearch(_,_),
              .TrendingReposSinceLastWeek(_,_):
             return "/search/repositories"
-        case .Repo(let fullname):
-            return "/repos/\(fullname)"
+        case .Repos(let fullname):
+            return "users/\(fullname)/repos"
         case .RepoReadMe(let fullname):
             return "/repos/\(fullname)/readme"
         case .Pulls(let fullname):
@@ -49,7 +52,12 @@ extension GitHub: TargetType {
             return "/repos/\(fullname)/commits"
         case .User:
             return "/user"
-            
+        case .Users:
+            return "/users"
+        case .usersSearch:
+            return "/search/users"
+        case .Profile(let username):
+            return "/users/\(username)"
         }
     }
     
@@ -59,12 +67,15 @@ extension GitHub: TargetType {
             return .post
         case .RepoSearch(_),
              .TrendingReposSinceLastWeek(_,_),
-             .Repo(_),
+             .Repos(_),
              .RepoReadMe(_),
              .Pulls(_),
              .Issues(_),
              .Commits(_),
-             .User:
+             .User,
+             .Users,
+             .usersSearch,
+             .Profile:
             return .get
         }
     }
@@ -76,15 +87,21 @@ extension GitHub: TargetType {
                 "scopes": ["public_repo", "user"],
                 "note": "(\(NSDate()))"
             ]
-        case .Repo(_),
+        case .Repos(_),
              .RepoReadMe(_),
              .User,
              .Pulls,
              .Issues,
-             .Commits:
+             .Commits,
+             .Profile:
             return nil
+        case .Users(let since):
+            guard let lastUsersID = since else { return nil }
+            return ["since":lastUsersID]
         case .RepoSearch(let query,let page):
             return ["q": query.urlEscaped,"page":page]
+        case .usersSearch(let query):
+            return ["q": query.urlEscaped]
         case .TrendingReposSinceLastWeek(let language,let page):
             let lastWeek = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())
             let formatter = DateFormatter()
