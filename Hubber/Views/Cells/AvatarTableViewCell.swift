@@ -11,9 +11,9 @@ import SDWebImage
 import SnapKit
 
 class AvatarTableViewCell: UITableViewCell {
-    
+
     var contentImageView: UIImageView!
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentImageView = UIImageView()
@@ -28,18 +28,18 @@ class AvatarTableViewCell: UITableViewCell {
             make.height.width.equalTo(100)
             make.centerY.centerX.equalTo(self)
         }
-        
+
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     var contentImageUrl: String? {
-        didSet{
+        didSet {
             guard let urlString = self.contentImageUrl, let url = URL(string: urlString) else { return }
             contentImageView.sd_setImage(with: url)
         }
     }
-    
+
 }

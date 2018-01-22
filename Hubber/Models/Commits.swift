@@ -9,22 +9,19 @@
 import Foundation
 import ObjectMapper
 
+public struct Commits: Mappable {
 
-public struct Commits :  Mappable{
-    
-    var author : Author?
-    var commentsUrl : String?
-    var commit : Commit?
-    var committer : Committer?
-    var htmlUrl : String?
-    var parents : [Parent]?
-    var sha : String?
-    var url : String?
-    
-    
-    public init?(map: Map){}
-    public mutating func mapping(map: Map)
-    {
+    var author: Author?
+    var commentsUrl: String?
+    var commit: Commit?
+    var committer: Committer?
+    var htmlUrl: String?
+    var parents: [Parent]?
+    var sha: String?
+    var url: String?
+
+    public init?(map: Map) {}
+    public mutating func mapping(map: Map) {
         author <- map["author"]
         commentsUrl <- map["comments_url"]
         commit <- map["commit"]
@@ -33,7 +30,7 @@ public struct Commits :  Mappable{
         parents <- map["parents"]
         sha <- map["sha"]
         url <- map["url"]
-        
+
     }
-    
+
 }

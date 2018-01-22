@@ -5,7 +5,7 @@ import Moya
 /// Subclass of MoyaProvider that returns Observable instances when requests are made. Much better than using completion closures.
 open class RxMoyaProvider<Target>: MoyaProvider<Target> where Target: TargetType {
     /// Initializes a reactive provider
-    override public init(endpointClosure: @escaping MoyaProvider<Target>.EndpointClosure, requestClosure: @escaping MoyaProvider<Target>.RequestClosure, stubClosure: @escaping MoyaProvider<Target>.StubClosure =  MoyaProvider<Target>.neverStub, callbackQueue: DispatchQueue?, manager: Manager = RxMoyaProvider<Target>.defaultAlamofireManager(), plugins: [PluginType], trackInflights: Bool = false) {
+    override public init(endpointClosure: @escaping MoyaProvider<Target>.EndpointClosure, requestClosure: @escaping MoyaProvider<Target>.RequestClosure, stubClosure: @escaping MoyaProvider<Target>.StubClosure =  MoyaProvider<Target>.neverStub, callbackQueue: DispatchQueue? = nil , manager: Manager = RxMoyaProvider<Target>.defaultAlamofireManager(), plugins: [PluginType], trackInflights: Bool = false) {
            super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins, trackInflights: trackInflights)
     }
 

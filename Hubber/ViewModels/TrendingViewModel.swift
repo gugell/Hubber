@@ -11,17 +11,17 @@ import RxCocoa
 import RxSwift
 
 public protocol TrendingViewModelInputs {
-    var loadPageTrigger:PublishSubject<Void> { get }
-    var loadNextPageTrigger:PublishSubject<Void> { get }
+    var loadPageTrigger: PublishSubject<Void> { get }
+    var loadNextPageTrigger: PublishSubject<Void> { get }
     func refresh()
     func tapped(indexRow: Int)
-    func keyword(keyword:String)
+    func keyword(keyword: String)
 }
 
 public protocol TrendingViewModelOutputs {
     var isLoading: Driver<Bool> { get }
     var moreLoading: Driver<Bool> { get }
-    var elements:Variable<[Repository]> { get }
+    var elements: Variable<[Repository]> { get }
     var selectedViewModel: Driver<RepoViewModel> { get }
 }
 
@@ -33,10 +33,10 @@ public protocol TrendingViewModelType {
 public class TrendingViewModel: TrendingViewModelType, TrendingViewModelInputs, TrendingViewModelOutputs {
 
     private let disposeBag = DisposeBag()
-    private var pageIndex:Int = 1
+    private var pageIndex: Int = 1
     private let error = PublishSubject<Swift.Error>()
     private var keyword = ""
-    
+
     init() {
         self.selectedViewModel = Driver.empty()
         self.loadPageTrigger = PublishSubject<Void>()
@@ -46,7 +46,7 @@ public class TrendingViewModel: TrendingViewModelType, TrendingViewModelInputs, 
         self.isLoading = Loading.asDriver()
         let moreLoading = ActivityIndicator()
         self.moreLoading = moreLoading.asDriver()
-        
+
         // first time load date
         let loadRequest = self.isLoading.asObservable()
             .sample(self.loadPageTrigger)
@@ -60,7 +60,7 @@ public class TrendingViewModel: TrendingViewModelType, TrendingViewModelInputs, 
                     .trackActivity(Loading)
                 }
         }
-        
+
         //get more data by page
         let nextRequest = self.moreLoading.asObservable()
              .sample(self.loadNextPageTrigger)
@@ -73,59 +73,58 @@ public class TrendingViewModel: TrendingViewModelType, TrendingViewModelInputs, 
                         .trackActivity(moreLoading)
                 }
         }
-        
-        let request = Observable.of(loadRequest,nextRequest)
+
+        let request = Observable.of(loadRequest, nextRequest)
                                 .merge()
                                 .shareReplay(1)
-        
-        let response = request.flatMap { repositories -> Observable<[Repository]> in
+
+        let response = request.flatMap { _ -> Observable<[Repository]> in
             request
                 .do(onError: { _error in
                     self.error.onNext(_error)
-                }).catchError({ error -> Observable<[Repository]> in
+                }).catchError({ _ -> Observable<[Repository]> in
                     Observable.empty()
                 })
             }.shareReplay(1)
-        
-        
+
         //combine data when get more data by paging
         Observable
-            .combineLatest(request, response, elements.asObservable()) { request, response, elements in
+            .combineLatest(request, response, elements.asObservable()) { _, response, elements in
                 return self.pageIndex == 1 ? response : elements + response
             }
             .sample(response)
             .bind(to:elements)
             .addDisposableTo(disposeBag)
-        
+
         //binding selected item
-        self.selectedViewModel = self.repository.asDriver().filterNil().flatMapLatest{ repo -> Driver<RepoViewModel> in
+        self.selectedViewModel = self.repository.asDriver().filterNil().flatMapLatest { repo -> Driver<RepoViewModel> in
            return Driver.just(RepoViewModel(repo: repo))
         }
 
     }
-    
+
     public func refresh() {
         self.loadPageTrigger
             .onNext(())
 
     }
-    
+
     let repository = Variable<Repository?>(nil)
     public func tapped(indexRow: Int) {
       let repository = self.elements.value[indexRow]
         self.repository.value = repository
     }
-    
+
     public func keyword(keyword: String) {
         self.keyword = keyword
     }
-    
+
     public var selectedViewModel: Driver<RepoViewModel>
-    public var loadPageTrigger:PublishSubject<Void>
-    public var loadNextPageTrigger:PublishSubject<Void>
+    public var loadPageTrigger: PublishSubject<Void>
+    public var loadNextPageTrigger: PublishSubject<Void>
     public var moreLoading: Driver<Bool>
     public var isLoading: Driver<Bool>
-    public var elements:Variable<[Repository]>
+    public var elements: Variable<[Repository]>
     public var inputs: TrendingViewModelInputs { return self}
     public var outputs: TrendingViewModelOutputs { return self}
 

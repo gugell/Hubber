@@ -9,35 +9,33 @@
 import Foundation
 import ObjectMapper
 
-public struct Issues :Mappable{
-    
-    var assignee : AnyObject?
-    var assignees : [AnyObject]?
-    var body : String?
-    var closedAt : AnyObject?
-    var comments : Int?
-    var commentsUrl : String?
-    var createdAt : String?
-    var eventsUrl : String?
-    var htmlUrl : String?
-    var id : Int?
-    var labels : [AnyObject]?
-    var labelsUrl : String?
-    var locked : Bool?
-    var milestone : AnyObject?
-    var number : Int?
-    var pullRequest : PullRequest?
-    var repositoryUrl : String?
-    var state : String?
-    var title : String?
-    var updatedAt : String?
-    var url : String?
-    var user : Owner?
-    
-    
-    public init?(map: Map){}
-    public mutating func mapping(map: Map)
-    {
+public struct Issues: Mappable {
+
+    var assignee: AnyObject?
+    var assignees: [AnyObject]?
+    var body: String?
+    var closedAt: AnyObject?
+    var comments: Int?
+    var commentsUrl: String?
+    var createdAt: String?
+    var eventsUrl: String?
+    var htmlUrl: String?
+    var id: Int?
+    var labels: [AnyObject]?
+    var labelsUrl: String?
+    var locked: Bool?
+    var milestone: AnyObject?
+    var number: Int?
+    var pullRequest: PullRequest?
+    var repositoryUrl: String?
+    var state: String?
+    var title: String?
+    var updatedAt: String?
+    var url: String?
+    var user: Owner?
+
+    public init?(map: Map) {}
+    public mutating func mapping(map: Map) {
         assignee <- map["assignee"]
         assignees <- map["assignees"]
         body <- map["body"]
@@ -60,7 +58,7 @@ public struct Issues :Mappable{
         updatedAt <- map["updated_at"]
         url <- map["url"]
         user <- map["user"]
-        
+
     }
-    
+
 }

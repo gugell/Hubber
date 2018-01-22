@@ -9,20 +9,18 @@
 import Foundation
 import ObjectMapper
 
+public struct Users: Mappable {
 
-public struct Users :Mappable{
-    
-    var incompleteResults : Bool?
-    var items : [User]?
-    var totalCount : Int?
-    
-    public init?(map: Map){}
-    
-    mutating public func mapping(map: Map)
-    {
+    var incompleteResults: Bool?
+    var items: [User]?
+    var totalCount: Int?
+
+    public init?(map: Map) {}
+
+    mutating public func mapping(map: Map) {
         incompleteResults <- map["incomplete_results"]
         items <- map["items"]
         totalCount <- map["total_count"]
     }
-    
+
 }

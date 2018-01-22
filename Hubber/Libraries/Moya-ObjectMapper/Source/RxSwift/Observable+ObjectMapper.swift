@@ -32,7 +32,6 @@ public extension ObservableType where E == Response {
   }
 }
 
-
 // MARK: - ImmutableMappable
 
 public extension ObservableType where E == Response {

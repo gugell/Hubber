@@ -6,86 +6,84 @@
 //  Copyright © 2018 Stamax. All rights reserved.
 //
 
-import Foundation 
+import Foundation
 import ObjectMapper
 
+public struct Repository: Mappable {
 
-public struct Repository : Mappable{
+	var archiveUrl: String?
+	var assigneesUrl: String?
+	var blobsUrl: String?
+	var branchesUrl: String?
+	var cloneUrl: String?
+	var collaboratorsUrl: String?
+	var commentsUrl: String?
+	var commitsUrl: String?
+	var compareUrl: String?
+	var contentsUrl: String?
+	var contributorsUrl: String?
+	var createdAt: String?
+	var defaultBranch: String?
+	var deploymentsUrl: String?
+	var descriptionField: String = ""
+	var downloadsUrl: String?
+	var eventsUrl: String?
+	var fork: Bool?
+	var forks: Int?
+	var forksCount: Int = 0
+	var forksUrl: String?
+	var fullName: String = ""
+	var gitCommitsUrl: String?
+	var gitRefsUrl: String?
+	var gitTagsUrl: String?
+	var gitUrl: String?
+	var hasDownloads: Bool?
+	var hasIssues: Bool?
+	var hasPages: Bool?
+	var hasWiki: Bool?
+	var homepage: String?
+	var hooksUrl: String?
+	var htmlUrl: String?
+	var id: Int?
+	var issueCommentUrl: String?
+	var issueEventsUrl: String?
+	var issuesUrl: String?
+	var keysUrl: String?
+	var labelsUrl: String?
+	var language: String = ""
+	var languagesUrl: String?
+	var mergesUrl: String?
+	var milestonesUrl: String?
+	var mirrorUrl: AnyObject?
+	var name: String?
+	var notificationsUrl: String?
+	var openIssues: Int?
+	var openIssuesCount: Int?
+	var owner: Owner?
+	var privateField: Bool?
+	var pullsUrl: String?
+	var pushedAt: String?
+	var releasesUrl: String?
+	var score: Float?
+	var size: Int?
+	var sshUrl: String?
+	var stargazersCount: Int = 0
+	var stargazersUrl: String?
+	var statusesUrl: String?
+	var subscribersUrl: String?
+	var subscriptionUrl: String?
+	var svnUrl: String?
+	var tagsUrl: String?
+	var teamsUrl: String?
+	var treesUrl: String?
+	var updatedAt: String?
+	var url: String?
+	var watchers: Int?
+	var watchersCount: Int?
 
-	var archiveUrl : String?
-	var assigneesUrl : String?
-	var blobsUrl : String?
-	var branchesUrl : String?
-	var cloneUrl : String?
-	var collaboratorsUrl : String?
-	var commentsUrl : String?
-	var commitsUrl : String?
-	var compareUrl : String?
-	var contentsUrl : String?
-	var contributorsUrl : String?
-	var createdAt : String?
-	var defaultBranch : String?
-	var deploymentsUrl : String?
-	var descriptionField : String = ""
-	var downloadsUrl : String?
-	var eventsUrl : String?
-	var fork : Bool?
-	var forks : Int?
-	var forksCount : Int = 0
-	var forksUrl : String?
-	var fullName : String = ""
-	var gitCommitsUrl : String?
-	var gitRefsUrl : String?
-	var gitTagsUrl : String?
-	var gitUrl : String?
-	var hasDownloads : Bool?
-	var hasIssues : Bool?
-	var hasPages : Bool?
-	var hasWiki : Bool?
-	var homepage : String?
-	var hooksUrl : String?
-	var htmlUrl : String?
-	var id : Int?
-	var issueCommentUrl : String?
-	var issueEventsUrl : String?
-	var issuesUrl : String?
-	var keysUrl : String?
-	var labelsUrl : String?
-	var language : String = ""
-	var languagesUrl : String?
-	var mergesUrl : String?
-	var milestonesUrl : String?
-	var mirrorUrl : AnyObject?
-	var name : String?
-	var notificationsUrl : String?
-	var openIssues : Int?
-	var openIssuesCount : Int?
-	var owner : Owner?
-	var privateField : Bool?
-	var pullsUrl : String?
-	var pushedAt : String?
-	var releasesUrl : String?
-	var score : Float?
-	var size : Int?
-	var sshUrl : String?
-	var stargazersCount : Int = 0
-	var stargazersUrl : String?
-	var statusesUrl : String?
-	var subscribersUrl : String?
-	var subscriptionUrl : String?
-	var svnUrl : String?
-	var tagsUrl : String?
-	var teamsUrl : String?
-	var treesUrl : String?
-	var updatedAt : String?
-	var url : String?
-	var watchers : Int?
-	var watchersCount : Int?
+    public init?(map: Map) {}
 
-    public init?(map: Map){}
-
-	public mutating func mapping(map: Map)
-	{
+	public mutating func mapping(map: Map) {
 		archiveUrl <- map["archive_url"]
 		assigneesUrl <- map["assignees_url"]
 		blobsUrl <- map["blobs_url"]
@@ -157,5 +155,4 @@ public struct Repository : Mappable{
 		watchersCount <- map["watchers_count"]
 	}
 
-   
 }

@@ -6,24 +6,21 @@
 //  Copyright © 2018 Stamax. All rights reserved.
 //
 
-import Foundation 
+import Foundation
 import ObjectMapper
 
+public struct Repositories: Mappable {
 
-public struct Repositories :Mappable{
+	var incompleteResults: Bool?
+	var items: [Repository]?
+	var totalCount: Int?
 
-	var incompleteResults : Bool?
-	var items : [Repository]?
-	var totalCount : Int?
+    public init?(map: Map) {}
 
-    public init?(map: Map){}
-
-	mutating public func mapping(map: Map)
-	{
+	mutating public func mapping(map: Map) {
 		incompleteResults <- map["incomplete_results"]
 		items <- map["items"]
 		totalCount <- map["total_count"]
 	}
-    
-}
 
+}

@@ -16,7 +16,7 @@ class SwiftIconTextView: UITextView {
             self.parseIcon()
         }
     }
-    
+
     override func awakeFromNib() {
         self.parseIcon()
     }

@@ -12,14 +12,14 @@ import RxCocoa
 import RxDataSources
 import XLPagerTabStrip
 
-class TrendingViewController: UIViewController,UITableViewDelegate,IndicatorInfoProvider {
+class TrendingViewController: UIViewController, UITableViewDelegate, IndicatorInfoProvider {
 
-    private var viewModel:TrendingViewModel!
+    private var viewModel: TrendingViewModel!
     private let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Repository>>()
     private let disposeBag = DisposeBag()
     private var tableView: UITableView!
     private var searchController: UISearchController!
-    private var refreshControl : UIRefreshControl?
+    private var refreshControl: UIRefreshControl?
     var itemInfo: IndicatorInfo = "View"
 
     override func viewDidLoad() {
@@ -32,44 +32,43 @@ class TrendingViewController: UIViewController,UITableViewDelegate,IndicatorInfo
         self.viewModel = TrendingViewModel()
         self.viewModel.keyword(keyword: self.itemInfo.title)
         self.viewModel.inputs.refresh()
-        
+
         dataSource.configureCell = { dataSource, tableView, indexPath, repository in
             //   let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "reuseIdentifier")
             let cell = tableView.dequeueReusableCell(withIdentifier: "repoCell") as! RepoCell
-                
+
                 //RepoCell(frame: CGRect(origin: CGPoint.init(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.width, height: 100)))
-            
+
             cell.configure(title: repository.fullName ,
                            description: repository.descriptionField,
                            language: repository.language,
                            stars:  "\(repository.stargazersCount) stars")
             return cell
         }
-        
+
         self.refreshControl?.rx.controlEvent(.valueChanged)
             .bind(to:self.viewModel.inputs.loadPageTrigger)
             .addDisposableTo(disposeBag)
-        
+
         self.tableView.rx.reachedBottom
             .bind(to:self.viewModel.inputs.loadNextPageTrigger)
             .addDisposableTo(disposeBag)
-        
+
         self.viewModel.outputs.elements.asDriver()
             .map { [SectionModel(model: "Repositories", items: $0)] }
             .drive(self.tableView.rx.items(dataSource: dataSource))
             .addDisposableTo(disposeBag)
-        
+
         self.tableView.rx.itemSelected
             .map { (at: $0, animated: true) }
             .subscribe(onNext: tableView.deselectRow)
             .addDisposableTo(disposeBag)
-        
-        
+
          self.tableView.rx.itemSelected
          .subscribe(onNext: { [weak self]indexPath in
            self?.viewModel.inputs.tapped(indexRow: indexPath.row)
          }).addDisposableTo(disposeBag)
-        
+
         self.viewModel.isLoading
             .do(onNext: { isLoading in
                 if isLoading {
@@ -79,29 +78,28 @@ class TrendingViewController: UIViewController,UITableViewDelegate,IndicatorInfo
             .drive(isLoading(for: self.view))
             .addDisposableTo(disposeBag)
         // Do any additional setup after loading the view.
-        
+
         self.viewModel.outputs.selectedViewModel.drive(onNext: { repoViewModel in
             let repoViewController = RepoViewController()
             repoViewController.viewModel = repoViewModel
             self.navigationController?.pushViewController(repoViewController, animated: true)
         }).addDisposableTo(disposeBag)
     }
-    
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func configureTableView() {
         self.tableView = UITableView(frame: UIScreen.main.bounds)
         self.tableView.rx.setDelegate(self)
             .addDisposableTo(disposeBag)
-        self.tableView.estimatedRowHeight = 100.0;
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 100.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
 
         self.view = self.tableView
-        
+
         self.tableView.tableFooterView = UIView()
         self.tableView.register(RepoCell.self, forCellReuseIdentifier: "repoCell")
         self.refreshControl = UIRefreshControl()
@@ -110,13 +108,11 @@ class TrendingViewController: UIViewController,UITableViewDelegate,IndicatorInfo
             refreshControl.backgroundColor = .clear
             refreshControl.tintColor = .lightGray
         }
-        
+
     }
-    
-    
+
     // MARK: - IndicatorInfoProvider
-    
-    
+
     init(itemInfo: IndicatorInfo) {
         self.itemInfo = itemInfo
         super.init(nibName: nil, bundle: nil)
@@ -126,7 +122,6 @@ class TrendingViewController: UIViewController,UITableViewDelegate,IndicatorInfo
         fatalError("init(coder:) has not been implemented")
     }
 
-    
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return itemInfo
     }
@@ -142,5 +137,3 @@ class TrendingViewController: UIViewController,UITableViewDelegate,IndicatorInfo
     */
 
 }
-
-

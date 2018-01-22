@@ -9,34 +9,31 @@
 import Foundation
 import ObjectMapper
 
+public struct Committer: Mappable {
 
-public struct Committer : Mappable{
-    
-    var date : String?
-    var email : String?
-    var name : String?
-    var avatarUrl : String?
-    var eventsUrl : String?
-    var followersUrl : String?
-    var followingUrl : String?
-    var gistsUrl : String?
-    var gravatarId : String?
-    var htmlUrl : String?
-    var id : Int?
-    var login : String?
-    var organizationsUrl : String?
-    var receivedEventsUrl : String?
-    var reposUrl : String?
-    var siteAdmin : Bool?
-    var starredUrl : String?
-    var subscriptionsUrl : String?
-    var type : String?
-    var url : String?
-    
-    
-    public init?(map: Map){}
-    public mutating func mapping(map: Map)
-    {
+    var date: String?
+    var email: String?
+    var name: String?
+    var avatarUrl: String?
+    var eventsUrl: String?
+    var followersUrl: String?
+    var followingUrl: String?
+    var gistsUrl: String?
+    var gravatarId: String?
+    var htmlUrl: String?
+    var id: Int?
+    var login: String?
+    var organizationsUrl: String?
+    var receivedEventsUrl: String?
+    var reposUrl: String?
+    var siteAdmin: Bool?
+    var starredUrl: String?
+    var subscriptionsUrl: String?
+    var type: String?
+    var url: String?
+
+    public init?(map: Map) {}
+    public mutating func mapping(map: Map) {
         date <- map["date"]
         email <- map["email"]
         name <- map["name"]
@@ -57,8 +54,7 @@ public struct Committer : Mappable{
         subscriptionsUrl <- map["subscriptions_url"]
         type <- map["type"]
         url <- map["url"]
-        
+
     }
-    
-    
+
 }

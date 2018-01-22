@@ -9,9 +9,9 @@
 import RxSwift
 
 public class GitHubDefaultValidationService: GitHubValidationService {
-    
+
     static let sharedValidationService = GitHubDefaultValidationService()
-    
+
     public func validateUserid(_ userid: String) -> Observable<ValidationResult> {
         if userid.count < 6 {
             return .just(.empty)
@@ -19,7 +19,7 @@ public class GitHubDefaultValidationService: GitHubValidationService {
             return .just(.ok(message: "Username available"))
         }
     }
-    
+
     public func validatePassword(_ password: String) -> ValidationResult {
         if password.isEmpty {
             return .empty
@@ -27,5 +27,5 @@ public class GitHubDefaultValidationService: GitHubValidationService {
             return .ok(message: "Password acceptable")
         }
     }
-    
+
 }

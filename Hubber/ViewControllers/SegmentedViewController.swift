@@ -13,9 +13,9 @@ class SegmentedViewController: ButtonBarPagerTabStripViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.title = "Trending"
-        
+
         self.edgesForExtendedLayout = []
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.view.backgroundColor = .white
@@ -31,8 +31,7 @@ class SegmentedViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
         settings.style.buttonBarItemLeftRightMargin = 0
-        
-    
+
         // Do any additional setup after loading the view.
     }
 
@@ -40,7 +39,7 @@ class SegmentedViewController: ButtonBarPagerTabStripViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         return [
             TrendingViewController(itemInfo: "Swift"),

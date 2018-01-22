@@ -33,7 +33,6 @@ public extension Response {
 
 }
 
-
 // MARK: - ImmutableMappable
 
 public extension Response {

@@ -6,34 +6,32 @@
 //  Copyright © 2018 Stamax. All rights reserved.
 //
 
-import Foundation 
+import Foundation
 import ObjectMapper
 
+struct Owner: Mappable {
 
-struct Owner : Mappable{
+	var avatarUrl: String?
+	var eventsUrl: String?
+	var followersUrl: String?
+	var followingUrl: String?
+	var gistsUrl: String?
+	var gravatarId: String?
+	var htmlUrl: String?
+	var id: Int?
+	var login: String = ""
+	var organizationsUrl: String?
+	var receivedEventsUrl: String?
+	var reposUrl: String?
+	var siteAdmin: Bool?
+	var starredUrl: String?
+	var subscriptionsUrl: String?
+	var type: String?
+	var url: String?
 
-	var avatarUrl : String?
-	var eventsUrl : String?
-	var followersUrl : String?
-	var followingUrl : String?
-	var gistsUrl : String?
-	var gravatarId : String?
-	var htmlUrl : String?
-	var id : Int?
-	var login : String = ""
-	var organizationsUrl : String?
-	var receivedEventsUrl : String?
-	var reposUrl : String?
-	var siteAdmin : Bool?
-	var starredUrl : String?
-	var subscriptionsUrl : String?
-	var type : String?
-	var url : String?
+    public init?(map: Map) {}
 
-    public init?(map: Map){}
-
-	mutating func mapping(map: Map)
-	{
+	mutating func mapping(map: Map) {
 		avatarUrl <- map["avatar_url"]
 		eventsUrl <- map["events_url"]
 		followersUrl <- map["followers_url"]
@@ -51,7 +49,7 @@ struct Owner : Mappable{
 		subscriptionsUrl <- map["subscriptions_url"]
 		type <- map["type"]
 		url <- map["url"]
-		
+
 	}
 
 }

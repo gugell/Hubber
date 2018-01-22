@@ -9,51 +9,49 @@
 import Foundation
 import ObjectMapper
 
+public struct User: Mappable {
 
-public struct User : Mappable{
-    
-    var avatarUrl : String?
-    var bio : String?
-    var blog : String?
-    var collaborators : Int?
-    var company : String?
-    var createdAt : String?
-    var diskUsage : Int?
-    var email : String?
-    var eventsUrl : String?
-    var followers : Int?
-    var followersUrl : String?
-    var following : Int?
-    var followingUrl : String?
-    var gistsUrl : String?
-    var gravatarId : String?
-    var hireable : AnyObject?
-    var htmlUrl : String?
-    var id : Int?
-    var location : AnyObject?
-    var login : String?
-    var name : AnyObject?
-    var organizationsUrl : String?
-    var ownedPrivateRepos : Int?
-    var plan : Plan?
-    var privateGists : Int?
-    var publicGists : Int?
-    var publicRepos : Int?
-    var receivedEventsUrl : String?
-    var reposUrl : String?
-    var siteAdmin : Bool?
-    var starredUrl : String?
-    var subscriptionsUrl : String?
-    var totalPrivateRepos : Int?
-    var twoFactorAuthentication : Bool?
-    var type : String?
-    var updatedAt : String?
-    var url : String?
-    
-    public init(){}
-    public init?(map: Map){}
-    public mutating func mapping(map: Map)
-    {
+    var avatarUrl: String?
+    var bio: String?
+    var blog: String?
+    var collaborators: Int?
+    var company: String?
+    var createdAt: String?
+    var diskUsage: Int?
+    var email: String?
+    var eventsUrl: String?
+    var followers: Int?
+    var followersUrl: String?
+    var following: Int?
+    var followingUrl: String?
+    var gistsUrl: String?
+    var gravatarId: String?
+    var hireable: AnyObject?
+    var htmlUrl: String?
+    var id: Int?
+    var location: AnyObject?
+    var login: String?
+    var name: AnyObject?
+    var organizationsUrl: String?
+    var ownedPrivateRepos: Int?
+    var plan: Plan?
+    var privateGists: Int?
+    var publicGists: Int?
+    var publicRepos: Int?
+    var receivedEventsUrl: String?
+    var reposUrl: String?
+    var siteAdmin: Bool?
+    var starredUrl: String?
+    var subscriptionsUrl: String?
+    var totalPrivateRepos: Int?
+    var twoFactorAuthentication: Bool?
+    var type: String?
+    var updatedAt: String?
+    var url: String?
+
+    public init() {}
+    public init?(map: Map) {}
+    public mutating func mapping(map: Map) {
         avatarUrl <- map["avatar_url"]
         bio <- map["bio"]
         blog <- map["blog"]
@@ -91,8 +89,7 @@ public struct User : Mappable{
         type <- map["type"]
         updatedAt <- map["updated_at"]
         url <- map["url"]
-        
-    }
 
+    }
 
 }

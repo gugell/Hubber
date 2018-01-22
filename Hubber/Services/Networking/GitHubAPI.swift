@@ -9,7 +9,7 @@
 import Moya
 
 public enum GitHub {
-    
+
     case Token(username: String, password: String)
     case RepoSearch(query: String, page:Int)
     case TrendingReposSinceLastWeek(language: String, page:Int)
@@ -24,21 +24,22 @@ public enum GitHub {
     case usersSearch(query:String)
 }
 
+public var stubJsonPath = ""
 
 extension GitHub: TargetType {
-    
+
     public var headers: [String : String]? {
         return nil
     }
-    
+
     public var baseURL: URL { return URL(string: "https://api.github.com")! }
-    
+
     public var path: String {
         switch self {
         case .Token(_, _):
             return "/authorizations"
-        case .RepoSearch(_,_),
-             .TrendingReposSinceLastWeek(_,_):
+        case .RepoSearch(_, _),
+             .TrendingReposSinceLastWeek(_, _):
             return "/search/repositories"
         case .Repos(let fullname):
             return "users/\(fullname)/repos"
@@ -60,13 +61,13 @@ extension GitHub: TargetType {
             return "/users/\(username)"
         }
     }
-    
+
     public var method: Moya.Method {
         switch self {
         case .Token(_, _):
             return .post
         case .RepoSearch(_),
-             .TrendingReposSinceLastWeek(_,_),
+             .TrendingReposSinceLastWeek(_, _),
              .Repos(_),
              .RepoReadMe(_),
              .Pulls(_),
@@ -79,7 +80,7 @@ extension GitHub: TargetType {
             return .get
         }
     }
-    
+
     public var parameters: [String: Any]? {
         switch self {
         case .Token(_, _):
@@ -97,43 +98,53 @@ extension GitHub: TargetType {
             return nil
         case .Users(let since):
             guard let lastUsersID = since else { return nil }
-            return ["since":lastUsersID]
-        case .RepoSearch(let query,let page):
-            return ["q": query.urlEscaped,"page":page]
+            return ["since": lastUsersID]
+        case .RepoSearch(let query, let page):
+            return ["q": query.urlEscaped, "page": page]
         case .usersSearch(let query):
             return ["q": query.urlEscaped]
-        case .TrendingReposSinceLastWeek(let language,let page):
+        case .TrendingReposSinceLastWeek(let language, let page):
             let lastWeek = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
-            return ["q" :"language:\(language) " + "created:>" + formatter.string(from: lastWeek!),
-                    "sort" : "stars",
-                    "order" : "desc",
-                    "page":page
+            return ["q": "language:\(language) " + "created:>" + formatter.string(from: lastWeek!),
+                    "sort": "stars",
+                    "order": "desc",
+                    "page": page
             ]
         }
     }
-    
+
     var multipartBody: [MultipartFormData]? {
         return nil
     }
-    
+
     public var parameterEncoding: ParameterEncoding {
-        
+
         switch self {
         case .Token(_, _):
             return JSONEncoding.default
         default:
             return URLEncoding.default
         }
-        
+
     }
-    
+
     public var task: Task {
         guard let parameters = self.parameters else { return .requestPlain }
         return .requestParameters(parameters: parameters, encoding: self.parameterEncoding)
     }
     
-    public var sampleData: Data { return Data() }
-    
+    public var sampleData: Data {
+        
+        switch self {
+        case   .RepoSearch(_),
+               .TrendingReposSinceLastWeek(_,_):
+            return StubResponse.fromJSONFile(filePath: stubJsonPath)
+        default:
+             return Data()
+        }
+        
+    }
+
 }

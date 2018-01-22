@@ -9,43 +9,40 @@
 import Foundation
 import ObjectMapper
 
+public struct Pull: Mappable {
 
-public struct Pull : Mappable{
-    
-    var links : Link?
-    var assignee : AnyObject?
-    var assignees : [AnyObject]?
-    var base : Base?
-    var body : String?
-    var closedAt : AnyObject?
-    var commentsUrl : String?
-    var commitsUrl : String?
-    var createdAt : String?
-    var diffUrl : String?
-    var head : Base?
-    var htmlUrl : String?
-    var id : Int?
-    var issueUrl : String?
-    var locked : Bool?
-    var mergeCommitSha : String?
-    var mergedAt : AnyObject?
-    var milestone : AnyObject?
-    var number : Int?
-    var patchUrl : String?
-    var reviewCommentUrl : String?
-    var reviewCommentsUrl : String?
-    var state : String?
-    var statusesUrl : String?
-    var title : String?
-    var updatedAt : String?
-    var url : String?
-    var user : Owner?
-    
-    
-    public init?(map: Map){}
+    var links: Link?
+    var assignee: AnyObject?
+    var assignees: [AnyObject]?
+    var base: Base?
+    var body: String?
+    var closedAt: AnyObject?
+    var commentsUrl: String?
+    var commitsUrl: String?
+    var createdAt: String?
+    var diffUrl: String?
+    var head: Base?
+    var htmlUrl: String?
+    var id: Int?
+    var issueUrl: String?
+    var locked: Bool?
+    var mergeCommitSha: String?
+    var mergedAt: AnyObject?
+    var milestone: AnyObject?
+    var number: Int?
+    var patchUrl: String?
+    var reviewCommentUrl: String?
+    var reviewCommentsUrl: String?
+    var state: String?
+    var statusesUrl: String?
+    var title: String?
+    var updatedAt: String?
+    var url: String?
+    var user: Owner?
 
-    public mutating func mapping(map: Map)
-    {
+    public init?(map: Map) {}
+
+    public mutating func mapping(map: Map) {
         links <- map["_links"]
         assignee <- map["assignee"]
         assignees <- map["assignees"]
@@ -74,7 +71,7 @@ public struct Pull : Mappable{
         updatedAt <- map["updated_at"]
         url <- map["url"]
         user <- map["user"]
-        
+
     }
-    
+
 }

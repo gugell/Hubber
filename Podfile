@@ -10,7 +10,6 @@ target 'Hubber' do
     pod 'RxBlocking', '~> 3.1'
     pod 'RxCocoa', '~> 3.1'
     pod 'RxSwift', '~> 3.1'
-    #pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/ivanbruel/Moya-ObjectMapper'
     pod 'RxOptional', '~> 3.1'
     #  pod 'Traits', '~> 0.1'
     pod 'RxDataSources', '~> 1.0'
@@ -22,9 +21,12 @@ target 'Hubber' do
 
   target 'HubberTests' do
     inherit! :search_paths
-    pod 'Quick', '~> 1.1'
-    pod 'Nimble', '~> 6.0'
-    pod 'RxTest', '~> 3.0'
+#    pod 'Quick', '~> 1.1'
+#    pod 'Nimble', '~> 6.0'
+#    pod 'RxTest', '~> 3.0'
+    pod 'Quick'
+    pod 'Nimble'
+    pod 'RxTest'
     # Pods for testing
   end
 

@@ -14,12 +14,12 @@ import RxDataSources
 public enum Profile {
     case avatar(title: String, avatarUrl: String)
     case detail(title: String, detail: String)
-    case listItem(title: String, description: String , language:String , stars:String)
+    case listItem(title: String, description: String, language:String, stars:String)
 }
 
 public typealias ProfileSectionModel = SectionModel<String, Profile>
 
-class ProfileViewController: UIViewController,UITableViewDelegate {
+class ProfileViewController: UIViewController, UITableViewDelegate {
 
     var viewModel = ProfileViewModel()
     private var tableView: UITableView!
@@ -30,12 +30,11 @@ class ProfileViewController: UIViewController,UITableViewDelegate {
         super.viewDidLoad()
         configureTableView()
         // Do any additional setup after loading the view.
-        
-        
+
         self.navigationItem.rightBarButtonItems = [
             NavigationItems.logout(self, #selector(logout)).button()
         ]
-                 
+
         dataSource.configureCell = { dataSource, tableView, indexPath, element in
             switch element {
             case let .avatar(_, avatarUrl):
@@ -48,7 +47,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate {
                 cell.textLabel?.textAlignment = .center
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
                 return cell
-            case let .listItem(title, desc , lng , stars):
+            case let .listItem(title, desc, lng, stars):
                 let cell = tableView.dequeueReusableCell(withIdentifier: "repoCell") as! RepoCell
                 cell.configure(title: title, description: desc, language: lng, stars: stars)
                 return cell
@@ -59,18 +58,17 @@ class ProfileViewController: UIViewController,UITableViewDelegate {
         .asObservable()
             .bind(to:self.tableView.rx.items(dataSource: dataSource))
         .addDisposableTo(disposeBag)
-        
+
         self.viewModel.outputs.selectedRepoViewModel?.drive(onNext: { repoViewModel in
             let repoViewController = RepoViewController()
             repoViewController.viewModel = repoViewModel
             self.navigationController?.pushViewController(repoViewController, animated: true)
         }).addDisposableTo(disposeBag)
-        
+
     }
 
-    
     func configureTableView() {
-        
+
         self.title = NSLocalizedString("Profile", comment: "")
         self.tableView = UITableView(frame: UIScreen.main.bounds)
         self.tableView.rx.setDelegate(self).addDisposableTo(disposeBag)
@@ -78,33 +76,30 @@ class ProfileViewController: UIViewController,UITableViewDelegate {
         self.tableView.register(AvatarTableViewCell.self, forCellReuseIdentifier: "avatarCell")
         self.tableView.register(RepoCell.self, forCellReuseIdentifier: "repoCell")
         self.view = self.tableView
-        
+
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 100
         self.tableView.separatorStyle = .singleLine
-        
+
         definesPresentationContext = true
-    
+
         self.tableView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 self?.viewModel.tapped(indexRow: indexPath.row)
             }).addDisposableTo(disposeBag)
-        
+
     }
-    
-    
-    @objc func logout(){
+
+    @objc func logout() {
         AuthManager.shared.signOut()
         guard let delegate = UIApplication.shared.delegate as?  AppDelegate else { return }
         delegate.appStateInspector.inspectAppState()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
- 
-    
 
     /*
     // MARK: - Navigation
@@ -117,4 +112,3 @@ class ProfileViewController: UIViewController,UITableViewDelegate {
     */
 
 }
-

@@ -14,49 +14,45 @@ import RxDataSources
 class RepoViewController: UIViewController {
 
     var tableView: UITableView!
-    var repoHeaderView:RepoHeaderView = RepoHeaderView(frame: CGRect(origin: CGPoint.init(x: 0, y: 0),
+    var repoHeaderView: RepoHeaderView = RepoHeaderView(frame: CGRect(origin: CGPoint.init(x: 0, y: 0),
                                                                      size: CGSize(width: UIScreen.main.bounds.width,
                                                                                   height: 100)))
-    var viewModel:RepoViewModel?
+    var viewModel: RepoViewModel?
     var datasource =  [RepositorySectionViewModel]()
     let disposeBag = DisposeBag()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
         bindRx()
     }
-    
+
     func bindRx() {
         guard let viewModel = self.viewModel else { return }
-        
+
         self.title = viewModel.outputs.fullName
-        
+
         self.repoHeaderView.configure(title: viewModel.outputs.fullName,
                                       description: viewModel.outputs.description,
                                       forksCount: viewModel.outputs.forksCounts,
                                       starsCount: viewModel.outputs.starsCount)
-        
+
         viewModel.outputs.dataObservable.drive(onNext: { data in
             self.datasource = data
             self.tableView.reloadData()
         })
         .addDisposableTo(disposeBag)
-        
+
         viewModel.isLoading
             .drive(isLoading(for: self.view))
             .addDisposableTo(disposeBag)
 
-        
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
@@ -71,7 +67,7 @@ class RepoViewController: UIViewController {
 }
 
 extension RepoViewController: UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return datasource[section].header
     }
@@ -79,11 +75,11 @@ extension RepoViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return datasource.count
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return datasource[section].items.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "RepositoryCell")
         let item = datasource[indexPath.section].items[indexPath.row]
@@ -91,10 +87,8 @@ extension RepoViewController: UITableViewDataSource {
         cell.detailTextLabel?.text = item.subtitle
         return cell
     }
-    
+
 }
-
-
 
 extension RepoViewController {
     func configureTableView() {
@@ -105,5 +99,3 @@ extension RepoViewController {
         self.tableView.tableFooterView = UIView() // Removes separators in empty cells
     }
 }
-
-

@@ -9,34 +9,31 @@
 import Foundation
 import ObjectMapper
 
+public struct Author: Mappable {
 
-public struct Author : Mappable{
-    
-    var avatarUrl : String?
-    var eventsUrl : String?
-    var followersUrl : String?
-    var followingUrl : String?
-    var gistsUrl : String?
-    var gravatarId : String?
-    var htmlUrl : String?
-    var id : Int?
-    var login : String = ""
-    var organizationsUrl : String?
-    var receivedEventsUrl : String?
-    var reposUrl : String?
-    var siteAdmin : Bool?
-    var starredUrl : String?
-    var subscriptionsUrl : String?
-    var type : String?
-    var url : String?
-    var date : String?
-    var email : String?
-    var name : String = ""
-    
-    
-    public init?(map: Map){}
-    public mutating func mapping(map: Map)
-    {
+    var avatarUrl: String?
+    var eventsUrl: String?
+    var followersUrl: String?
+    var followingUrl: String?
+    var gistsUrl: String?
+    var gravatarId: String?
+    var htmlUrl: String?
+    var id: Int?
+    var login: String = ""
+    var organizationsUrl: String?
+    var receivedEventsUrl: String?
+    var reposUrl: String?
+    var siteAdmin: Bool?
+    var starredUrl: String?
+    var subscriptionsUrl: String?
+    var type: String?
+    var url: String?
+    var date: String?
+    var email: String?
+    var name: String = ""
+
+    public init?(map: Map) {}
+    public mutating func mapping(map: Map) {
         avatarUrl <- map["avatar_url"]
         eventsUrl <- map["events_url"]
         followersUrl <- map["followers_url"]
@@ -57,8 +54,7 @@ public struct Author : Mappable{
         date <- map["date"]
         email <- map["email"]
         name <- map["name"]
-        
+
     }
-    
 
 }

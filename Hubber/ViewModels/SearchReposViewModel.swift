@@ -10,17 +10,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-
 public protocol SearchReposViewModelInputs {
-    var searchKeyword:PublishSubject<String?> { get }
-    var loadNextPageTrigger:PublishSubject<Void> { get }
+    var searchKeyword: PublishSubject<String?> { get }
+    var loadNextPageTrigger: PublishSubject<Void> { get }
     func tapped(repository: Repository)
 
 }
 
 public protocol SearchReposViewModelOutputs {
     var isLoading: Driver<Bool> { get }
-    var elements:Variable<[Repository]> { get }
+    var elements: Variable<[Repository]> { get }
     var selectedViewModel: Driver<RepoViewModel> { get }
 }
 
@@ -33,8 +32,8 @@ public class SearchReposViewModel: SearchReposViewModelType, SearchReposViewMode
 
     private let disposeBag = DisposeBag()
     private let error = PublishSubject<Swift.Error>()
-    private var pageIndex:Int = 1
-    private var query:String = ""
+    private var pageIndex: Int = 1
+    private var query: String = ""
     init() {
         self.selectedViewModel = Driver.empty()
         self.searchKeyword = PublishSubject<String?>()
@@ -43,19 +42,18 @@ public class SearchReposViewModel: SearchReposViewModelType, SearchReposViewMode
         let isLoading = ActivityIndicator()
         self.isLoading = isLoading.asDriver()
 
-        
         let keywordRequest = self.searchKeyword.asDriver(onErrorJustReturn: "")
             .throttle(0.3)
             .distinctUntilChanged()
             .flatMap { query -> Driver<[Repository]> in
-                self.pageIndex = 1;
+                self.pageIndex = 1
                 self.elements.value = []
                 self.query = query!
                 return GitHubAPIManager.sharedAPI.repositories(query!, page: self.pageIndex)
                     .trackActivity(isLoading)
                     .asDriver(onErrorJustReturn: [])
         }
-        
+
         let nextPageRequest = isLoading
             .asObservable()
             .sample(self.loadNextPageTrigger)
@@ -68,46 +66,44 @@ public class SearchReposViewModel: SearchReposViewModelType, SearchReposViewMode
                 }
              return Driver.empty()
         }
-        
-        
-        let request = Observable.of(keywordRequest.asObservable(),nextPageRequest)
+
+        let request = Observable.of(keywordRequest.asObservable(), nextPageRequest)
                       .merge()
                       .shareReplay(1)
-        
-        
-        let response = request.flatMap { repositories -> Observable<[Repository]> in
+
+        let response = request.flatMap { _ -> Observable<[Repository]> in
             request
                 .do(onError: { _error in
                     self.error.onNext(_error)
-                }).catchError({ error -> Observable<[Repository]> in
+                }).catchError({ _ -> Observable<[Repository]> in
                     Observable.empty()
                 })
             }.shareReplay(1)
-        
+
         Observable
-            .combineLatest(request, response, elements.asObservable()) { request, response, elements in
+            .combineLatest(request, response, elements.asObservable()) { _, response, elements in
                 return self.pageIndex == 1 ? response : elements + response
             }
             .sample(response)
             .bind(to:elements)
             .addDisposableTo(disposeBag)
 
-        self.selectedViewModel = self.repository.asDriver().filterNil().flatMapLatest{ repo -> Driver<RepoViewModel> in
+        self.selectedViewModel = self.repository.asDriver().filterNil().flatMapLatest { repo -> Driver<RepoViewModel> in
             return Driver.just(RepoViewModel(repo: repo))
         }
     }
-    
+
     let repository = Variable<Repository?>(nil)
     public func tapped(repository: Repository) {
         self.repository.value = repository
     }
-    
+
     public var selectedViewModel: Driver<RepoViewModel>
-    public var elements:Variable<[Repository]>
+    public var elements: Variable<[Repository]>
     public var isLoading: Driver<Bool>
-    public var searchKeyword:PublishSubject<String?>
-    public var loadNextPageTrigger:PublishSubject<Void>
+    public var searchKeyword: PublishSubject<String?>
+    public var loadNextPageTrigger: PublishSubject<Void>
     public var inputs: SearchReposViewModelInputs { return self}
     public var outputs: SearchReposViewModelOutputs { return self}
-    
+
 }

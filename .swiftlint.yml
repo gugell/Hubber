@@ -1,0 +1,10 @@
+disabled_rules: 
+   - line_length
+   - todo
+
+#TODO:
+# Review disabled rules when we have time
+# and fix one by one
+
+excluded:
+  - Pods
